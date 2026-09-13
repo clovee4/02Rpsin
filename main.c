@@ -58,19 +58,16 @@ bool	ft_is_nbr(char *str)
 
 int	main(int argc, char *argv[])
 {
+	char	*number;
+
 	if (!(argc == 2 || argc == 3))
 		return (1);
 	if (argc == 2)
-	{
-		if (ft_is_nbr(argv[1]) == false)
-			return (1);
-		ft_split_number(argv[1]);
-	}
-	if (argc == 3)
-	{
-		if(ft_is_nbr(argv[2]) == false)
-			return (1);
-		ft_split_number(argv[2]);
-	}
+		number = argv[1];
+	else
+		number = argv[2];
+	if (ft_is_nbr(number) == false)
+		return (1);
+	ft_split_number(number);
 	return (0);
 }
