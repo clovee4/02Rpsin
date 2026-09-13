@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdbool.h>
 
 void	ft_process_group(char *nb, int pos, int size)
 {
@@ -14,7 +15,7 @@ int	ft_strlen(char *str)
 	i = 0;
 	while (str[i])
 	{
-		i ++;
+		i++;
 	}
 	return (i);
 }
@@ -24,7 +25,7 @@ void	ft_split_number(char *nb)
 	int	len;
 	int	first;
 	int	pos;
-	
+
 	pos = 0;
 	len = ft_strlen(nb);
 	first = len % 3;
@@ -39,18 +40,20 @@ void	ft_split_number(char *nb)
 	}
 }
 
-int	ft_is_nbr(char *str)
+bool	ft_is_nbr(char *str)
 {
 	int	i;
 
+	if (str[0] == '\0')
+		return (false);
 	i = 0;
 	while (str[i] != '\0')
 	{
 		if (!('0' <= str[i] && str[i] <= '9'))
-			return (0);
-		i ++;
+			return (false);
+		i++;
 	}
-	return (1);
+	return (true);
 }
 
 int	main(int argc, char *argv[])
@@ -59,13 +62,13 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (argc == 2)
 	{
-		if(ft_is_nbr(argv[1]) == 0)
+		if (ft_is_nbr(argv[1]) == false)
 			return (1);
 		ft_split_number(argv[1]);
 	}
 	if (argc == 3)
 	{
-		if(ft_is_nbr(argv[2]) == 0)
+		if(ft_is_nbr(argv[2]) == false)
 			return (1);
 		ft_split_number(argv[2]);
 	}

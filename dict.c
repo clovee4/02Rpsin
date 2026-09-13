@@ -19,18 +19,6 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-int	ft_parse_dict(char *buffer)
-{
-	int	i;
-	int	start;
-
-	i = 0;
-	start = 0;
-	while (buffer[i] != '\n' && buffer[i] != '\0')
-		start = i;
-		ft_parse_line(&buffer[start], i - start);
-}
-
 int	ft_parse_line(char *str, int len)
 {
 	int		colon;
@@ -46,6 +34,31 @@ int	ft_parse_line(char *str, int len)
 	key[colon] = '\0';
 	ft_strncpy(value, &str[colon + 1], len - (colon + 1));
 	value[len - (colon + 1)] = '\0';
+	return (0);
+}
+
+int	ft_parse_dict(char *buffer)
+{
+	int	i;
+	int	start;
+
+	i = 0;
+	start = 0;
+	while (buffer[i] != '\0')
+	{
+		if (buffer[i] == '\n')
+		{
+			if (ft_parse_line(&buffer[start], i - start) != 0)
+				return (1);
+			start = i + 1;
+		}
+		i++;
+	}
+	if (i > start)
+	{
+		if (ft_parse_line(&buffer[start], i - start) != 0)
+			return (1);
+	}
 	return (0);
 }
 
